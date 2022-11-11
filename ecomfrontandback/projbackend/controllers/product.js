@@ -1,0 +1,177 @@
+const productModelCollection = require('../models/product.js')
+
+const formidable = require('formidable');
+const _ = require('lodash');
+const fs = require('fs')
+
+// populate ?
+exports.getProductById = (req, res, next, id)=>{
+    console.log('PRODUCT ID ',id);
+    productModelCollection.findById(id)
+    .populate('category')
+    .exec((err, product)=>{
+        if(err){
+            return res.status(400).json({
+                error: "Product not found"
+            })
+        }
+        req.product = product;
+        next();
+    })
+};
+
+exports.createProduct = (req, res)=>{
+    console.log('creating product');
+     let form = new formidable.IncomingForm();
+     form.keepExtensions = true;
+     form.parse(req, (error, fields, file)=>{
+        // console.log(file.photo);
+        if(error){
+            return res.status(400).json({
+                error: 'Unable to save the file'
+            })
+        }
+        let product = new productModelCollection(fields);
+        console.log(product);
+        const {name, description, category, stock, price} = fields;
+        if( !name || !description || !category || !stock || !price){
+            return res.status(400).json({
+                error: "Please include all the required fields"
+            });
+        }
+        // handle file
+        if(file.photo){
+            if(file.photo.size > 3000000){
+                return res.status(400).json({
+                    error: "File size should be less then 3Mb"
+                })
+            }
+            product.photo.data = fs.readFileSync(file.photo.filepath);
+            product.photo.contentType = file.photo.type;
+        }
+        // Save file in DB.
+        product.save((err, product)=>{
+            if(err){
+                return res.status(400).json({
+                    error: "Saving file  in Db failed"
+                })
+            }
+            res.json(product);
+        })
+     })
+}
+
+exports.getProduct = (req, res)=>{
+    req.product.photo = undefined;
+    res.json(req.product);
+}
+exports.photoById = (req, res, next)=>{
+    if(req.product.photo.data){
+        res.set("Content-Type", req.product.photo.contentType);
+        return res.send(req.product.photo.data);
+    }
+    next();
+}
+
+exports.deleteProduct = (req,res)=>{
+    let product = req.product;
+    product.remove((err, deletedProduct)=>{
+        if(err){
+            return res.status(400).json({
+                error: "Failed to delete the product"
+            })
+        }
+        res.json({
+            message: `Successfully deleted product: ${deletedProduct.name}`,
+            deletedProduct
+        })
+    })   
+}
+
+exports.updateProduct = (req,res)=>{
+    let form = new formidable.IncomingForm();
+     form.keepExtensions = true;
+     form.parse(req, (error, fields, file)=>{
+        // console.log(file.photo);
+        if(error){
+            return res.status(400).json({
+                error: 'Unable to save the file'
+            })
+        }
+        let product = req.product;
+        product = _.extend(product, fields);
+        console.log(product);
+        const {name, description, category, stock, price} = fields;
+
+        // handle file
+        if(file.photo){
+            if(file.photo.size > 3000000){
+                return res.status(400).json({
+                    error: "File size should be less then 3Mb"
+                })
+            }
+            product.photo.data = fs.readFileSync(file.photo.filepath);
+            product.photo.contentType = file.photo.type;
+        }
+        // Save file in DB.
+        product.save((err, product)=>{
+            if(err){
+                return res.status(400).json({
+                    error: "Updation of file in Db failed"
+                })
+            }
+            res.json(product);
+        })
+     })
+}
+
+exports.getAllProducts = (req,res)=>{
+    // .select method used to include or exclude fields
+    let limit = parseInt(req.query.limit) || 8;
+    let sortBy = req.query.sortBy || "_id";
+    Product.find()
+    .select("-photo")
+    .sort([sortBy, "asc"])
+    .populate("category")
+    .limit(limit)
+    .exec((err, products)=>{
+        if(err){
+            return res.status(400).json({
+                error: "Products unavailable"
+            })
+        }
+        res.json({
+            products
+        })
+    })
+}
+
+exports.getAllUniqueCategory = (req, res)=>{
+    productModelCollection.distinct("category", {}, (err, category)=>{
+        if(err){
+            return res.status(400).json({
+                error: "No category found"
+            })
+        }
+        res.json(category);
+    })
+}
+
+exports.updateStock = (req, res, next)=>{
+    let myOperations = req.body.order.products.map(product=>{
+        return {
+            updateOne: {
+                filter: {_id: product_id},
+                update: {$inc: {sotck: -product.count, sold: +product.count}}
+            }
+        }
+    })
+    Product.bulkWrite(myOperations, {}, (err, products) => {
+        if(err){
+            return res.status(400).json({
+                error: "Bulk operations failed"
+            })
+        }
+        next();
+    })
+}
