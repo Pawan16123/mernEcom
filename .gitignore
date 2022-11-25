@@ -14,6 +14,7 @@
 
 # misc
 /ecomfrontandback/projbackend/.env
+/ecomfrontandback/projfrontend/.env
 .DS_Store
 .env.local
 .env.development.local
