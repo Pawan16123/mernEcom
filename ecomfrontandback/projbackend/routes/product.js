@@ -15,8 +15,9 @@ router.post('/create/:userid', isSignedIn, isAuthenticated, isAdmin, createProdu
 // Read
 router.get('/:productid', getProduct);
 router.get('/photo/:productid', photoById);
+
 // Read - listing
-router.get('/getAllproducts', getAllProducts);
+router.get('/get/getAllproducts', getAllProducts);
 router.get('/catogories', getAllUniqueCategory);
 
 // Update

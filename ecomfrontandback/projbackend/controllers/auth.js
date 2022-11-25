@@ -7,6 +7,7 @@ exports.signup = (req,res)=>{
     console.log('POST Request received on /api/signUP');
     const err = validationResult(req);
     // console.log(err.errors[0]);
+    console.log(req.body);
     if(err.errors.length){
        const {msg, param} = err.errors[0];
        return res.status(400).json({
@@ -21,7 +22,7 @@ exports.signup = (req,res)=>{
         console.log('Error while saving the user in DB',err?._message || err);
         if(err){
             return res.status(400).json({
-                err: "Unable to save the user in DB"
+                error: "Unable to save the user in DB"
             })
         }
         res.status(200).json({
@@ -46,6 +47,8 @@ exports.signup = (req,res)=>{
 
 exports.signin = (req,res)=>{
     console.log('POST Request received on /api/signIN');
+    console.log(req.body);
+
     const err = validationResult(req);
     // console.log(err.errors[0]);
     if(err.errors.length){
@@ -55,7 +58,6 @@ exports.signin = (req,res)=>{
         field: param
        }) 
     }
-    // console.log(req.body);
     let {email, password} = req.body;
     userModelCollection.findOne({email},(err, user)=>{
         // console.log('FIND ONE RESPONSE: ',err, user);
@@ -73,11 +75,13 @@ exports.signin = (req,res)=>{
         }
         const token = jwt.sign({_id: user._id, extra: "data was sent for testing"}, process.env.SECRET);
         res.cookie('token', token, {expire: new Date() + 9999});
-        const {_id, firstName, email, role} = user;
+        // Cookie not available in frontEND
+        // console.log('COOKIE IS SET');
+        const {_id, firstName, lastName, email, role} = user;
         res.status(200).json({
             message: 'User successfully LoggedIN',
             token,
-            user: {_id, firstName, email, role}
+            user: {_id, firstName, lastName, email, role}
         });
     });
     // });
@@ -93,17 +97,17 @@ exports.signout = (req,res)=>{
 
 
 // Protected routes middlewares
-// It takes the Autorization token from the header with value in format 'Bearer <toke> 'and just validates whether its a valid token or not that's all. And then add 'auth' to 'req' with _id and iat. Which can be used for authentication. It decodes the token and generates the obj that was sent/used while creating token and sets it in the auth obj of the req.
+// It takes the Autorization token from the header with value in format 'Bearer <token> 'and just validates whether its a valid token or not that's all. And then add 'auth' to 'req' with _id and iat. Which can be used for authentication. It decodes the token and generates the obj that was sent/used while creating token and sets it in the auth obj of the req.
 exports.isSignedIn = ejwt({
     secret: process.env.SECRET,
-    algorithms: ["HS256"],
+    algorithms: ["HS256"]
 });
 
 // IsAuthenticated just compares the authId which was added to request from isSignedIn method to the profileId which was set from getUserById method/param.
 
 exports.isAuthenticated = (req,res,next)=>{
-    console.log(req.profile?._id,req.auth?._id )
-// new ObjectId("6367d1e0752bcaa0ae56bb87") 6367d1e0752bcaa0ae56bb87
+    // console.log(req.profile?._id,req.auth?._id )
+    // new ObjectId("6367d1e0752bcaa0ae56bb87") 6367d1e0752bcaa0ae56bb87
     // let checker = req.profile?._id.toString() === req.auth?._id;
     let checker = req.profile?._id == req.auth?._id;
     if(!checker){

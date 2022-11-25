@@ -11,7 +11,7 @@ const ProductCartSchema = new Schema({
     quantity: Number,
     updatedPrice: Number
 })
-
+// quantity
 const orderSchema = new Schema({
     product: [ProductCartSchema],
     transaction_id: {},

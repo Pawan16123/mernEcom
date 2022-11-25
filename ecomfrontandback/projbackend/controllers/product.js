@@ -32,8 +32,9 @@ exports.createProduct = (req, res)=>{
             })
         }
         let product = new productModelCollection(fields);
-        console.log(product);
+        // console.log(product, fields, file);
         const {name, description, category, stock, price} = fields;
+        // console.log(stock, name );
         if( !name || !description || !category || !stock || !price){
             return res.status(400).json({
                 error: "Please include all the required fields"
@@ -65,8 +66,10 @@ exports.getProduct = (req, res)=>{
     req.product.photo = undefined;
     res.json(req.product);
 }
+
+// test: http://localhost:2022/product/photo/636a97e2a67ccd95fc813fdc
 exports.photoById = (req, res, next)=>{
-    if(req.product.photo.data){
+    if(req.product?.photo.data){
         res.set("Content-Type", req.product.photo.contentType);
         return res.send(req.product.photo.data);
     }
@@ -89,6 +92,7 @@ exports.deleteProduct = (req,res)=>{
 }
 
 exports.updateProduct = (req,res)=>{
+    console.log('request received');
     let form = new formidable.IncomingForm();
      form.keepExtensions = true;
      form.parse(req, (error, fields, file)=>{
@@ -100,8 +104,13 @@ exports.updateProduct = (req,res)=>{
         }
         let product = req.product;
         product = _.extend(product, fields);
-        console.log(product);
+        // console.log(product);
         const {name, description, category, stock, price} = fields;
+        if(!name && !description && !category && !price){
+            return res.status(400).json({
+                error: "Atleast one filed need to be updated."
+            })
+        }
 
         // handle file
         if(file.photo){
@@ -127,14 +136,17 @@ exports.updateProduct = (req,res)=>{
 
 exports.getAllProducts = (req,res)=>{
     // .select method used to include or exclude fields
+    // .sort([sortBy, "asc"])
+    console.log('req.qery.limit:', req.query.limit);
     let limit = parseInt(req.query.limit) || 8;
     let sortBy = req.query.sortBy || "_id";
-    Product.find()
+    productModelCollection.find()
     .select("-photo")
-    .sort([sortBy, "asc"])
+    .sort({sortBy:-1})
     .populate("category")
     .limit(limit)
     .exec((err, products)=>{
+        console.log()
         if(err){
             return res.status(400).json({
                 error: "Products unavailable"

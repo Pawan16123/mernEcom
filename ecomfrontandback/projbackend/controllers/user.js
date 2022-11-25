@@ -2,7 +2,7 @@ const userModelCollection = require('../models/user.js');
 const orderModelCollection = require('../models/order.js');
 
 exports.getUser = (req,res)=>{
-    console.log(req.profile);
+    // console.log(req.profile);
     // setting fields undefined to hide it from response.
     req.profile.salt = req.profile.encryptPassword = req.profile.role = req.profile.updatedAt = undefined;
     // req.profile.createdAt = undefined;
@@ -120,6 +120,7 @@ exports.userPurchaseList = (req,res)=>{
 exports.pushOrderInPurchaseList = (req, res, next)=>{
     let purchases = [];
     req.body.order.products.forEach(el => {
+        //quantity
         const {_id, name, description, category, quantity } = el;
         purchases.push({
             _id, name, description, category, quantity,

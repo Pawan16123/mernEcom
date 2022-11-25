@@ -1,0 +1,57 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+label{
+    font-size: 0.6em;
+}
+#root, html, body{
+    min-height: 100vh;
+}
+body{
+    background-color: rgb(8, 23, 23);
+    color: white;
+    position: relative;
+}
+
+.container-fluid{
+    padding: 0;
+}
+
+/* .footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+} */
+
+.signin-form, .signup-form{
+    width: 40%;
+    margin: auto;
+    text-align: left;
+    line-height: 2;
+}
+
+.signup-form button{
+    margin-top: 1em;
+}
+
+.form-check{
+    display: flex;
+    align-items: center;
+    margin-top: 0.6em;
+}
+
+.form-check input{
+    margin-right: 15px;
+    margin-top: 0px;
+}
+
+.main-content{
+ min-height:  calc(100vh - 196px);
+}
+.baseCustombg{
+    background-color: #102c1d63 !important;
+    width: 55%;
+}

@@ -15,12 +15,14 @@ exports.getCategoryById = (req, res, next, id)=>{
 
 exports.createCategory = (req, res)=>{
     const category = new categoryModelCollection(req.body);
-    // console.log('adsfkladsjflkasdjf', category);
+    console.log('Request for creating Category', category);
     category.save((err, category)=>{
         if(err){
-            console.log(err);
+            if(`${err}`.includes('duplicate')){
+                err = 'as it already Exists'
+            }
             return res.status(400).json({
-                error: "Unable to create category"
+                error: `Unable to create category ${err}`
             })
         }
         res.json({

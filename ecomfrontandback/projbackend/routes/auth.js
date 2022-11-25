@@ -5,7 +5,7 @@ const { check, validationResult } = require('express-validator');
 
 // Creatingg the user
 router.post('/signup', [
-    check('firstName','Name should be three char').isLength({min: 3}),
+    check('firstName','Name should be at least three char').isLength({min: 3}),
     check('email','Valid Email is required').isEmail(),
     check('password','Password should be more than six char').isLength({min: 6})
 ], signup);

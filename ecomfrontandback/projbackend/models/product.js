@@ -33,6 +33,10 @@ const productSchema = new Schema({
         data: Buffer,
         constentType: String
     },
+    stock:{
+        type:Number,
+        default: 0
+    }
 },{
     timestamps: true
 });
