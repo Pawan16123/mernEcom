@@ -1,5 +1,5 @@
 const userModelCollection = require('../models/user.js');
-const orderModelCollection = require('../models/order.js');
+const {Order: orderModelCollection, ProductCart} = require('../models/order.js');
 
 exports.getUser = (req,res)=>{
     // console.log(req.profile);
@@ -107,6 +107,7 @@ exports.userPurchaseList = (req,res)=>{
     orderModelCollection.find({user: req.profile._id})
     .populate("user", "_id firstName")
     .exec((err, order)=>{
+        console.log('ORDER: : ',order)
         if(err){
             return res.status(400).json({
                 error: "No order found"

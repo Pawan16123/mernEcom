@@ -5,6 +5,7 @@ import { isAuthenticatedFrontEnd } from "./helper/Index";
 
 const  PrivateRoute = ({ children}) => {
   let auth = isAuthenticatedFrontEnd();
+  // console.log('auth: ', auth);
   return (
     auth  ? children : <Navigate to="/signin"/>
   );

@@ -16,6 +16,8 @@ const userRouter = require('./routes/user.js');
 const categoryRouter = require('./routes/category.js');
 const productRouter = require('./routes/product.js');
 const orderRouter = require('./routes/order.js');
+const stripeRouter = require('./routes/stripeRoute.js');
+
 
 // Middlewares
 app.use(bodyParser.json());
@@ -28,6 +30,7 @@ app.use('/user', userRouter);
 app.use('/category', categoryRouter);
 app.use('/product', productRouter);
 app.use('/order', orderRouter);
+app.use('/payment', stripeRouter);
 
 app.get('/',(req,res)=>{
     res.send(`Your unique id is : ${uuidv4()}`);

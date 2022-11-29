@@ -14,6 +14,7 @@ import ManageCategory from './admin/ManageCategory';
 import ManageProduct from './admin/Manageproduct';
 import AddProduct from './admin/Addproduct';
 import Updateproducts from './admin/Updateproducts';
+import Cart from './core/Cart';
 
 const Newroutes = ()=>{
     return(
@@ -34,6 +35,11 @@ const Newroutes = ()=>{
                     <Route path='/user/dashboard' element={
                         <PrivateRoute>
                             <Userdashboard/>
+                        </PrivateRoute>
+                    }/>
+                    <Route path='/cart' element={
+                        <PrivateRoute>
+                            <Cart/>
                         </PrivateRoute>
                     }/>
                     <Route path='/admin/create/category' element={

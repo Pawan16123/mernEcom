@@ -8,7 +8,7 @@ router.param('userid', getUserById);
 
 router.get('/:userid', isSignedIn, isAuthenticated, getUser);
 router.put('/:userid',isSignedIn, isAuthenticated, updateUser);
-router.get('/order/:userid', isSignedIn, isAuthenticated, userPurchaseList);
+router.get('/order/create/:userid', isSignedIn, isAuthenticated, userPurchaseList);
 
 
 

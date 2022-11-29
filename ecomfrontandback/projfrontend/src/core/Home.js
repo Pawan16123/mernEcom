@@ -8,7 +8,6 @@ import Card from './Card.jsx';
 
 const Home = ()=>{
   const [allProducts, setAllProducts] = useState([]);
-  console.count('rerender', allProducts, allProducts[0]);
   useEffect(()=>{
     getAllProducts()
     .then(products=>{
@@ -16,7 +15,6 @@ const Home = ()=>{
         console.log('Unable to get the products');
       }else{
         setAllProducts(products.products);
-        console.log('got all the products', products);
       }
     })
   },[])
@@ -25,8 +23,8 @@ const Home = ()=>{
       <div className="row">
         {allProducts[0] && allProducts.map((product,index) => {
             return (
-              <div className="col-4">
-                <Card key={index} product={product}/>
+              <div key={index}  className="col-4">
+                <Card product={product}/>
               </div>
             )
         })}

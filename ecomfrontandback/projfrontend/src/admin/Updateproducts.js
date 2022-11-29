@@ -76,7 +76,7 @@ const Updateproducts = () => {
         if(getRedirected){
         setTimeout(()=>{
             navigate(-1);
-        },4000)
+        },2000)
         }
     },[getRedirected])
     const handleChange = field => event =>{
@@ -192,7 +192,7 @@ const Updateproducts = () => {
             </div>
         )
     }
-    // const preload = () =&gt; {
+    // const preload = () => {
     //     Promise.all([getProduct(productId), getCategories()]).then(
     //       ([product, categories]) => {
     //         let error = product.error || categories.error;
