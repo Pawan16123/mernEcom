@@ -9,6 +9,7 @@ const { v4: uuidv4 } = require('uuid');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const path = require('path');
 
 // Import routes
 const authRouter = require('./routes/auth.js');
@@ -23,6 +24,13 @@ const stripeRouter = require('./routes/stripeRoute.js');
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors());
+
+
+// Static Files
+app.use(express.static(path.join(__dirname, '../projfrontend/build')));
+app.get('*', function(req,res){
+    res.sendFile(path.join(__dirname, "../projfrontend/build/index.html"))
+})
 
 // Routes
 app.use('/api', authRouter);

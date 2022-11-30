@@ -170,9 +170,8 @@ const AddProduct = () => {
     <Base
         title='Add Products'
         description='Lets Add new Products to the store'
-        className='container bg-primary p-4 baseCustombg'
+        className='container bg-primary p-4 w-lg-50 w-xs-80 baseCustombg'
     >
-      <h3>ADD PRODUCT</h3>
       <div className="success-fail-status">
         {successMsg()}
         {failMsg()}
