@@ -1,7 +1,7 @@
 import { API } from "../../backendApi";
 
 export const signup = user=>{
-    return fetch(`${API}/api/signup`, {
+    return fetch(`/api/signup`, {
         method:'POST',
         body:JSON.stringify(user),
         headers: {
@@ -16,7 +16,7 @@ export const signup = user=>{
     .catch(error=>console.log(error, 'ERROR FROM AUTHINDEX'))
 }
 export const signinfetch = loginDetails=>{
-    return fetch(`${API}/api/signin`, {
+    return fetch(`/api/signin`, {
         method:'POST',
         body:JSON.stringify(loginDetails),
         headers: {
@@ -43,7 +43,7 @@ export const signout = next=>{
         localStorage.removeItem('jwt');
         next();
 
-        return fetch(`${API}/api/signout`,{
+        return fetch(`/api/signout`,{
             method: 'GET'
         })
         .then(res=>{

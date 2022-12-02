@@ -2,7 +2,7 @@ import { API } from "../../backendApi"
 
 // Create category
 export const createCategoryReq = (userid, token, categoryDetails)=>{
-    return fetch(`${API}/category/create/${userid}`, {
+    return fetch(`/category/create/${userid}`, {
         method:'POST',
         headers:{
             Accept: '*/*',
@@ -21,7 +21,7 @@ export const createCategoryReq = (userid, token, categoryDetails)=>{
 
 // Get all categories
 export const getCategories = ()=>{
-    return fetch(`${API}/category/getallcategory`,{method:"GET"})
+    return fetch(`/category/getallcategory`,{method:"GET"})
     .then( res =>{
         return res.json();
     })
@@ -33,7 +33,7 @@ export const getCategories = ()=>{
 // Products Frontend calls
 // Create product
 export const createProductFront = (userid, token, productDetails)=>{
-    return fetch(`${API}/product/create/${userid}`,{
+    return fetch(`/product/create/${userid}`,{
             method:"POST",
             headers:{
                 Authorization: `Bearer ${token}`
@@ -52,7 +52,7 @@ export const createProductFront = (userid, token, productDetails)=>{
 
 // Get single product
 export const getProduct = (productid)=>{
-    return fetch(`${API}/product/${productid}`,{method:"GET"})
+    return fetch(`/product/${productid}`,{method:"GET"})
     .then( res =>{
         return res.json();
     })
@@ -63,7 +63,7 @@ export const getProduct = (productid)=>{
 
 // Update a product
 export const updateProduct = (userid, productid, token, productDetails)=>{
-    return fetch(`${API}/product/update/${productid}/${userid}`,{
+    return fetch(`/product/update/${productid}/${userid}`,{
             method:"PUT",
             headers:{
                 Authorization: `Bearer ${token}`
@@ -83,7 +83,7 @@ export const updateProduct = (userid, productid, token, productDetails)=>{
 // Delete a product
 
 export const deleteProduct = (userid, productid, token)=>{
-    return fetch(`${API}/product/delete/${productid}/${userid}`,{
+    return fetch(`/product/delete/${productid}/${userid}`,{
             method:"DELETE",
             headers:{
                 Accept: '*/*',

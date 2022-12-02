@@ -5,15 +5,16 @@ import Base from './Base'
 import { addToCart, removeFromCart } from './helper/cardHelper';
 
 function Card({product, addRemove = true, remount, setRemount, cartOrCard = true}) {
-    // let imageUrl = product?._id ? `${API}/product/photo/${product._id}`: "https://c4.wallpaperflare.com/wallpaper/365/244/884/uchiha-itachi-naruto-shippuuden-anbu-silhouette-wallpaper-preview.jpg"
+    // let imageUrl = product?._id ? `/product/photo/${product._id}`: "https://c4.wallpaperflare.com/wallpaper/365/244/884/uchiha-itachi-naruto-shippuuden-anbu-silhouette-wallpaper-preview.jpg"
     const navigate = useNavigate();
     const [imgUrl, setImgUrl] = useState('');
     const [redirect, setRedirect] = useState(false);
     useEffect(() => {
-        fetch(`${API}/product/photo/${product._id}`)
+        fetch(`/product/photo/${product._id}`)
         .then((el)=>{
+            console.log('How to do this', el)
             if(el.ok){
-                setImgUrl(`${API}/product/photo/${product._id}`)
+                setImgUrl(`/product/photo/${product._id}`)
             }else{
                 setImgUrl("https://c4.wallpaperflare.com/wallpaper/365/244/884/uchiha-itachi-naruto-shippuuden-anbu-silhouette-wallpaper-preview.jpg")
             }

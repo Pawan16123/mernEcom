@@ -36,7 +36,7 @@ function StripeCheckout(allProducts, remount, setRemount) {
             console.log('cart is empty now lets reload')
         });
         setRemount(!remount);
-        return fetch(`${API}/payment/stripe`,{
+        return fetch(`/payment/stripe`,{
             method: 'POST',
             headers,
             body: JSON.stringify(body)

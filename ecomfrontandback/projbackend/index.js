@@ -26,11 +26,6 @@ app.use(cookieParser());
 app.use(cors());
 
 
-// Static Files
-app.use(express.static(path.join(__dirname, '../projfrontend/build')));
-app.get('*', function(req,res){
-    res.sendFile(path.join(__dirname, "../projfrontend/build/index.html"))
-})
 
 // Routes
 app.use('/api', authRouter);
@@ -42,6 +37,13 @@ app.use('/payment', stripeRouter);
 
 app.get('/',(req,res)=>{
     res.send(`Your unique id is : ${uuidv4()}`);
+})
+
+
+// Static Files
+app.use(express.static(path.join(__dirname, '../projfrontend/build')));
+app.get('*', function(req,res){
+    res.sendFile(path.join(__dirname, "../projfrontend/build/index.html"))
 })
 
 app.listen(port,()=>{

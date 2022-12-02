@@ -17,6 +17,9 @@ const Home = ()=>{
         setAllProducts(products.products);
       }
     })
+    .catch(error=>{
+      console.log('Unable to get homepage data:', error);
+    })
   },[])
   return (
     <Base title='Home Page' description='Welcome to Ecom'>
