@@ -34,10 +34,10 @@ const Cart = ()=>{
   return (
     <Base title='Cart' description='Proceed to checkout'>
       <div className="row text-center">
-        <div className="col-6">
+        <div className="col-xs-12 col-lg-6">
             {loadAllProducts()}
         </div>
-        <div className="col-6">
+        <div className="col-xs-12 col-lg-6">
             {StripeCheckout(allProducts, remount, setRemount)}
         </div>
       </div>

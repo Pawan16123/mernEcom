@@ -53,10 +53,10 @@ const Admindashboard = ()=> {
         className='container bg-success p-3'
     >
         <div className="row">
-            <div className="col-3">
+            <div className="col-xs-11 col-lg-3">
                 {adminMenu()}
             </div>
-            <div className="col-9">
+            <div className="col-xs-11 col-lg-9">
                 {adminContent()}
             </div>
         </div>

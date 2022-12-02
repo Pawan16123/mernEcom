@@ -70,9 +70,9 @@ function Card({product, addRemove = true, remount, setRemount, cartOrCard = true
                     {redirectToCart(redirect)}
                     </div>
                 </div>
-            </div> : <div className="card text-white text-start bg-dark border h-25 mb-2 border-secondary d-flex flex-row">
+                </div> : <div className="card text-white text-start bg-dark border h-25 mb-2 border-secondary d-flex flex-lg-row flex-s=xm-column">
                 <div className="card-header lead" style={{width:'200px'}}>{product.name}</div>
-                <div className="card-body w-25 d-flex flex-row justify-content-between align-items-center">
+                <div className="card-body w-xs-100 w-lg-25 d-flex flex-row justify-content-between align-items-center">
                     <div className="">
                         <img src={imgUrl} 
                         alt={`Product ${product._id}`} 
