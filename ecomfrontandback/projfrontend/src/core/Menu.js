@@ -48,7 +48,7 @@ function Menu() {
                    () => {
                         navigate('/');
                         signout(()=>{
-                            console.log('USER SIGNED OUT SUCCESSFULLY');
+                            // console.log('USER SIGNED OUT SUCCESSFULLY');
                             
                         })
                     }

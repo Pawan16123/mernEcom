@@ -21,13 +21,13 @@ const Manageproduct = () => {
         })
     }
     const deleteProductonClick = (productid)=>{
-        console.log(productid);
+        // console.log(productid);
         deleteProduct(user._id, productid, token)
         .then(res=>{
             if(res.error){
                 console.log('Unable to delete the product',res.error);
             }else{
-                console.log(res.message,res.deletedProduct);
+                // console.log(res.message,res.deletedProduct);
                 preLoad();
             }
         })

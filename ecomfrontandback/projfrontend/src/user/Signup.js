@@ -21,10 +21,8 @@ function Signup() {
     const onsubmit = event =>{
         event.preventDefault();
         setValue({...values, error: false});
-        console.log('BEFORE SUBMIT', values, firstName);
         signup({firstName, lastName, email, password})
         .then(data=>{
-            console.log('DATA ON SUBMIT', data)
             if(data.error){
                 setValue({...values, error: data.error, success:false});
             }else{
