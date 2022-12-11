@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
 import Base from '../core/Base';
-import { IoArrowBackCircleSharp } from 'react-icons/io5';
 import { createCategoryReq } from './helper/AdminApicall';
 import { isAuthenticatedFrontEnd } from '../auth/helper/Index';
 import BackBtn from '../core/helper/BackBtn';

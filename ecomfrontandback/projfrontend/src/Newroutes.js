@@ -1,8 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import App from './App';
 import Home from './core/Home';
-import Base from './core/Base';
 import Signup from './user/Signup';
 import Signin from './user/Signin';
 import Userdashboard from './user/Userdashboard';
