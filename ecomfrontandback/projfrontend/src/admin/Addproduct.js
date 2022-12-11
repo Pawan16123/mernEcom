@@ -61,7 +61,7 @@ const AddProduct = () => {
   const onSubmit = (event)=>{
     event.preventDefault();
     setValues({...values, error:"", loading: true});
-    console.log('Data sending to the form'. formData)
+    // console.log('Data sending to the form'. formData)
     createProductFront(user._id, token, formData)
     .then(data=>{
       if(data.error){

@@ -7,7 +7,7 @@ exports.signup = (req,res)=>{
     console.log('POST Request received on /api/signUP');
     const err = validationResult(req);
     // console.log(err.errors[0]);
-    console.log(req.body);
+    // console.log(req.body);
     if(err.errors.length){
        const {msg, param} = err.errors[0];
        return res.status(400).json({
@@ -47,7 +47,7 @@ exports.signup = (req,res)=>{
 
 exports.signin = (req,res)=>{
     console.log('POST Request received on /api/signIN');
-    console.log(req.body);
+    // console.log(req.body);
 
     const err = validationResult(req);
     // console.log(err.errors[0]);

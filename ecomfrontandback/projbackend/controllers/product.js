@@ -34,7 +34,7 @@ exports.createProduct = (req, res)=>{
         let product = new productModelCollection(fields);
         // console.log(product, fields, file);
         const {name, description, category, stock, price} = fields;
-        // console.log(stock, name );
+        // console.log(stock, name);
         if( !name || !description || !category || !stock || !price){
             return res.status(400).json({
                 error: "Please include all the required fields"

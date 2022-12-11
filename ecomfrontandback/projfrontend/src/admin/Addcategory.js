@@ -29,7 +29,7 @@ const Addcategory = () => {
             }else{
                 setSuccess(true);
                 setCatName('');
-                console.log(res);
+                // console.log(res);
             }
         })
         .catch(err=>{

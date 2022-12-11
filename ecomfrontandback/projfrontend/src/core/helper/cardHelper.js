@@ -40,7 +40,6 @@ export const loadCartProducts = () => {
 }
 
 export const emptyCart = (next) =>{
-    console.log('This is next: ',next);
     if(typeof window !== undefined){
         localStorage.removeItem('cart');
     }
