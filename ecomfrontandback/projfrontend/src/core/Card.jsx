@@ -14,8 +14,7 @@ function Card({product, addRemove = true, remount, setRemount, cartOrCard = true
         .then((el)=>{
             // console.log('How to do this', el)
             if(el.ok){
-                // setImgUrl(`/product/photo/${product._id}`)
-                setImgUrl("https://c4.wallpaperflare.com/wallpaper/365/244/884/uchiha-itachi-naruto-shippuuden-anbu-silhouette-wallpaper-preview.jpg")
+                setImgUrl(`/product/photo/${product._id}`)
             }else{
                 setImgUrl("https://c4.wallpaperflare.com/wallpaper/365/244/884/uchiha-itachi-naruto-shippuuden-anbu-silhouette-wallpaper-preview.jpg")
             }

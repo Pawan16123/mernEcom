@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 import Base from '../core/Base';
 import { IoArrowBackCircleSharp } from 'react-icons/io5';
 import { createCategoryReq } from './helper/AdminApicall';
