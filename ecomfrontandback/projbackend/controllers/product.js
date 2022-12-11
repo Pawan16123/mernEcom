@@ -71,7 +71,7 @@ exports.getProduct = (req, res)=>{
 exports.photoById = (req, res, next)=>{
     if(req.product?.photo.data){
         // res.set("Content-Type", req.product.photo.contentType);
-        res.set("Content-Type", 'image/jpeg');
+        res.set("Content-Type", "image/jpeg");
         return res.send(req.product.photo.data);
     }
     next();
