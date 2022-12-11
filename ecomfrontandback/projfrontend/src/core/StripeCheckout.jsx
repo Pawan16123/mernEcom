@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { isAuthenticatedFrontEnd } from '../auth/helper/Index';
 import StripeGateway from 'react-stripe-checkout';
 import { emptyCart, loadCartProducts } from './helper/cardHelper';
-import { API, STRIPE_PK } from '../backendApi';
+import {STRIPE_PK } from '../backendApi';
 
 function StripeCheckout(allProducts, remount, setRemount) {
     const [totalPrice, setTotalPrice] = useState('');
