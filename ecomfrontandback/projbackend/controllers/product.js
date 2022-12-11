@@ -70,7 +70,8 @@ exports.getProduct = (req, res)=>{
 // test: http://localhost:2022/product/photo/636a97e2a67ccd95fc813fdc
 exports.photoById = (req, res, next)=>{
     if(req.product?.photo.data){
-        res.set("Content-Type", req.product.photo.contentType);
+        res.set("Content-Type", 'image/jpeg');
+        // console.log('Content TyPE', req.product.photo.contentType);
         return res.send(req.product.photo.data);
     }
     next();
